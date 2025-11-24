@@ -1,0 +1,31 @@
+# Virtualenv
+irenv/
+venv/
+.env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# OS junk
+.DS_Store
+
+# Large data files
+data/processed/corpus_*.jsonl
+data/processed/jsonl/
+
+# BM25 indexes (Lucene)
+index_sparse/
+
+# Dense indexes and big blobs
+index_dense/*.faiss
+index_dense/*.fp32.memmap
+
+# SQLite docstores
+docstore/*.sqlite
+
+# Logs / temp
+*.log
+tmp/

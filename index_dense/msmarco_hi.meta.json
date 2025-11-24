@@ -1,0 +1,10 @@
+{
+  "model_name": "intfloat/multilingual-e5-base",
+  "dimension": 768,
+  "doc_count": 61210,
+  "built_at": "2025-11-24T07:58:10.060892+00:00",
+  "corpus_path": "/Users/meghanakiran/xir-project 2/data/processed/corpus_hi_filtered.jsonl",
+  "faiss_index_path": "/Users/meghanakiran/xir-project 2/index_dense/msmarco_hi.faiss",
+  "docstore_path": "/Users/meghanakiran/xir-project 2/docstore/msmarco_hi.sqlite",
+  "normalize_embeddings": true
+}
