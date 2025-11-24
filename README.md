@@ -70,14 +70,14 @@ These files have been created:
 
 ## 4. Key Components
 #### 4.1. Sparse Retrieval (BM25)
-##### Powered by Pyserini + Lucene
-##### Separate indexes for en, hi, sv
-##### Fast lexical matching
+- Powered by Pyserini + Lucene
+- Separate indexes for en, hi, sv
+- Fast lexical matching
 
 #### 4.2. Dense Retrieval (Semantic)
-##### Encoder: intfloat/multilingual-e5-base
-##### FAISS index built using HNSW (for fast ANN)
-##### SQLite docstores for metadata
+- Encoder: intfloat/multilingual-e5-base
+- FAISS index built using HNSW (for fast ANN)
+- SQLite docstores for metadata
 
 #### 4.3 Hybrid Retrieval (Fusion)
 Score =
@@ -88,18 +88,18 @@ Score =
 
 #### 4.4 Cross-lingual Routing
 ##### Automatic mapping of:
-##### query_lang → target_lang for 9 retrieval directions (hi→en, sv→hi, en→sv, etc.)
+- query_lang → target_lang for 9 retrieval directions (hi→en, sv→hi, en→sv, etc.)
 
 ## 5. Evaluation Framework (CLIRMatrix)
 ##### These were built:
-##### scripts/eval_retrieval.py
-##### retrieval/metrics.py
-##### retrieval/eval_utils.py
+- scripts/eval_retrieval.py
+- retrieval/metrics.py
+- retrieval/eval_utils.py
 
 ### Metrics:
-#### nDCG@10
-#### MRR@10
-#### Recall@100
+- nDCG@10
+- MRR@10
+- Recall@100
 
 Topics & qrels, that are provided in the eval/ directory, will automatically load and evaluate all queries.
 
