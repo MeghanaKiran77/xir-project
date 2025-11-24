@@ -19,6 +19,7 @@ It is designed to retrieve documents across languages (e.g., Hindi query → Swe
 The system is structured with clear modularity and reproducibility.
 
 ## 2. System Architecture
+```
 User Query (hi / en / sv)
           │
           ▼
@@ -35,7 +36,7 @@ BM25 (Pyserini)   Dense (E5 + FAISS-HNSW)
           │
           ▼
    Top-k Ranked Documents
-
+```
 
 
 ## 3. Datasets Used
