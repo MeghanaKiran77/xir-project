@@ -19,23 +19,22 @@ It is designed to retrieve documents across languages (e.g., Hindi query → Swe
 The system is structured with clear modularity and reproducibility.
 
 ## 2. System Architecture
-```mermaid
 flowchart TD
-    Q[User Query (hi / en / sv)]
-    R[MultilingualRetriever]
+    Q["User Query (hi / en / sv)"]
+    R["MultilingualRetriever"]
 
     Q --> R
 
     subgraph Backends
-        B[BM25\n(Pyserini / Lucene)]
-        D[Dense\n(multilingual-e5 + FAISS-HNSW)]
+        B["BM25<br/>(Pyserini / Lucene)"]
+        D["Dense<br/>(multilingual-e5 + FAISS-HNSW)"]
     end
 
     R --> B
     R --> D
 
-    F[Fusion (α-mix)]
-    K[Top-k Ranked Documents]
+    F["Fusion (α-mix)"]
+    K["Top-k Ranked Documents"]
 
     B --> F
     D --> F
