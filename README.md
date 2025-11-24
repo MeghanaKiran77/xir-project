@@ -5,8 +5,7 @@
 
 ## 1. Project Overview
 
-XIR is a full cross-lingual information retrieval (CLIR) system that supports:
-Hindi, Swedish, and English.
+XIR is a full cross-lingual information retrieval (CLIR) system that supports: Hindi, Swedish, and English.
 
 It is designed to retrieve documents across languages (e.g., Hindi query → Swedish documents) using a hybrid architecture:
 
@@ -20,22 +19,24 @@ The system is structured with clear modularity and reproducibility.
 
 ## 2. System Architecture
 ```
-User Query (hi / en / sv)
-          │
-          ▼
-  MultilingualRetriever
-          │
-   ┌──────┴────────┐
-   │               │
-   ▼               ▼
-BM25 (Pyserini)   Dense (E5 + FAISS-HNSW)
-   │               │
-   └──────┬────────┘
-          ▼
-     Fusion (α-mix)
-          │
-          ▼
-   Top-k Ranked Documents
+               ┌────────────────────────────┐
+               │   User Query (hi/en/sv)    │
+               └───────────────┬────────────┘
+                               ▼
+                 ┌──────────────────────────┐
+                 │  MultilingualRetriever   │
+                 └───────────────┬──────────┘
+     ┌───────────────────────────┼──────────────────────────┐
+     ▼                           ▼                          ▼
+┌────────────┐            ┌─────────────┐           ┌────────────────┐
+│  BM25      │            │ Dense (E5)  │           │  Cross-lingual │
+│ (Pyserini) │            │ (FAISS-HNSW)│           │   Routing      │
+└────────────┘            └─────────────┘           └────────────────┘
+                 ┌──────────────────────────┐
+                 │      Fusion (α-mix)      │
+                 └──────────────────────────┘
+                               ▼
+                   Top-k Ranked Documents
 ```
 
 
@@ -49,14 +50,14 @@ Used to expand multilingual testing (Phase 2).
 - CLIRMatrix (High-quality multilingual IR benchmark)
 
 Used for official cross-lingual evaluation (Phase 3):
-hi → en
-en → hi
-sv → en
-en → sv
+- hi → en
+- en → hi
+- sv → en
+- en → sv
 
-These files have been created
-eval/topics/clirmatrix_*_dev.jsonl  
-eval/qrels/clirmatrix_*_dev.tsv
+These files have been created:
+- eval/topics/clirmatrix_*_dev.jsonl  
+- eval/qrels/clirmatrix_*_dev.tsv
 
 ## Dataset Statistics
 
@@ -68,41 +69,41 @@ eval/qrels/clirmatrix_*_dev.tsv
 
 
 ## 4. Key Components
-4.1. Sparse Retrieval (BM25)
-Powered by Pyserini + Lucene
-Separate indexes for en, hi, sv
-Fast lexical matching
+#### 4.1. Sparse Retrieval (BM25)
+##### Powered by Pyserini + Lucene
+##### Separate indexes for en, hi, sv
+##### Fast lexical matching
 
-4.2. Dense Retrieval (Semantic)
-Encoder: intfloat/multilingual-e5-base
-FAISS index built using HNSW (for fast ANN)
-SQLite docstores for metadata
+#### 4.2. Dense Retrieval (Semantic)
+##### Encoder: intfloat/multilingual-e5-base
+##### FAISS index built using HNSW (for fast ANN)
+##### SQLite docstores for metadata
 
-4.3 Hybrid Retrieval (Fusion)
+#### 4.3 Hybrid Retrieval (Fusion)
 Score =
 α * normalized_bm25 + (1 - α) * dense_score
-Defaults:
-α = 0.5
-k = 100
+- Defaults:
+-   α = 0.5
+-   k = 100
 
-4.4 Cross-lingual Routing
-Automatic mapping of:
-query_lang → target_lang for 9 retrieval directions (hi→en, sv→hi, en→sv, etc.)
+#### 4.4 Cross-lingual Routing
+##### Automatic mapping of:
+##### query_lang → target_lang for 9 retrieval directions (hi→en, sv→hi, en→sv, etc.)
 
 ## 5. Evaluation Framework (CLIRMatrix)
-These were built:
-scripts/eval_retrieval.py
-retrieval/metrics.py
-retrieval/eval_utils.py
+##### These were built:
+##### scripts/eval_retrieval.py
+##### retrieval/metrics.py
+##### retrieval/eval_utils.py
 
 ### Metrics:
-nDCG@10
-MRR@10
-Recall@100
+#### nDCG@10
+#### MRR@10
+#### Recall@100
 
 Topics & qrels, that are provided in the eval/ directory, will automatically load and evaluate all queries.
 
-Example command:
+#### Example command:
 
 python scripts/eval_retrieval.py \
   --topics eval/topics/clirmatrix_hi_en_dev.jsonl \
@@ -111,7 +112,7 @@ python scripts/eval_retrieval.py \
 
 ## 6. Demo CLI
 
-Example:
+#### Example:
 python scripts/demo_search_cli.py \
   --query "मशीन लर्निंग क्या है" \
   --query_lang hi \
@@ -119,6 +120,7 @@ python scripts/demo_search_cli.py \
   --k 5
 
 ## 7. Repository Structure
+```
 retrieval/
     bm25_search.py
     dense_search.py
@@ -133,6 +135,7 @@ eval/topics/
 eval/qrels/
 scripts/
 ui/app.py
+```
 
 ## 8. Workflow
 ### ✔ Phase 1 — English Monolingual Baseline
@@ -160,6 +163,3 @@ MiniLM-based re-ranking for top-50 candidates
 
 ### Phase 4 — Streamlit UI
 Interactive multilingual search demo
-
-## 10. License
-MIT License
