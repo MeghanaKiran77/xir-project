@@ -20,7 +20,7 @@ The system is structured with clear modularity and reproducibility.
 
 ## 2. System Architecture
                ┌────────────────────────────┐
-               │    User Query (hi/en/sv)   │
+               │      User Query (hi/en/sv) │
                └───────────────┬────────────┘
                                ▼
                  ┌──────────────────────────┐
@@ -29,14 +29,15 @@ The system is structured with clear modularity and reproducibility.
      ┌───────────────────────────┼──────────────────────────┐
      ▼                           ▼                          ▼
 ┌────────────┐            ┌─────────────┐           ┌────────────────┐
-│  BM25      │            │ Dense (E5)  │           │  Cross-lingual │
-│ (Pyserini) │            │ (FAISS-HNSW)│           │   Routing      │
+│  BM25      │            │ Dense (E5)   │           │  Cross-lingual │
+│ (Pyserini) │            │ (FAISS-HNSW) │           │   Routing      │
 └────────────┘            └─────────────┘           └────────────────┘
                  ┌──────────────────────────┐
                  │      Fusion (α-mix)      │
                  └──────────────────────────┘
                                ▼
                    Top-k Ranked Documents
+
 
 ## 3. Datasets Used
 - MS MARCO (English subset):
