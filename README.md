@@ -3,6 +3,8 @@
 
 ## Hybrid BM25 + Dense FAISS + Fusion + CLIRMatrix Evaluation
 
+## Project Video Link for evaluation: https://drive.google.com/drive/u/0/folders/1XrOFbfeg3kUgG3G6y1mg-e4NVAK5ogIV 
+
 ## 1. Project Overview
 
 XIR is a full cross-lingual information retrieval (CLIR) system that supports: Hindi, Swedish, and English.
